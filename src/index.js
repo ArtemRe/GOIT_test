@@ -1,4 +1,4 @@
-import user from '../src/data/user.json';
+import users from '../src/data/users.json';
 
 const refs = {
   cardsList: document.querySelector('.cards-list'),
@@ -6,32 +6,37 @@ const refs = {
 };
 
 let following = [];
-let users = [];
+let user = [];
+function followerFormat(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
 function checkFollowing(id) {
   return following.includes(id) ? 'following' : 'follow';
 }
 
 const renderCard = () => {
   const followingLocal = JSON.parse(localStorage.getItem('following'));
-  const usersLocal = JSON.parse(localStorage.getItem('user'));
+  const usersLocal = JSON.parse(localStorage.getItem('users'));
 
   following = followingLocal ? followingLocal : [];
-  users = usersLocal ? usersLocal : user;
+  user = usersLocal ? usersLocal : users;
+
   refs.cardsList.innerHTML = criateCards();
 };
 
 const criateCards = () => {
   return user
     .map(
-      ({ id, user, tweets, followers, avatar }) =>
+      ({ id, tweets, followers, avatar }) =>
         `<li class="card" data-id=${id} data-state="follow">
         <div class="card-avatar">
                 <div class="card-img">
-                    <img src=${avatar}  alt="${user}" />
+                    <img src=${avatar} alt=""/>
                 </div>
             </div>
             <p class="card-tweets">${tweets} tweets</p>
-            <p class="card-followers">${followers} followers</p>
+            <p class="card-followers">${followerFormat(followers)} followers</p>
             <button type="button" class="card-btn" data-state=${checkFollowing(
               id
             )} data-id=${id}>${checkFollowing(id)}</button>
@@ -39,7 +44,7 @@ const criateCards = () => {
     )
     .join('');
 };
-console.log(user);
+
 const follow = e => {
   const target = e.target;
   if (target.classList.contains('card-btn')) {

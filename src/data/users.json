@@ -4,7 +4,7 @@
     "user": "Elon Reeve Musk",
     "tweets": 777,
     "followers": 100500,
-    "avatar": "./images/003-.png"
+    "avatar": "../images/hansel.png"
   },
 
   {
@@ -12,14 +12,14 @@
     "user": "Elon Reeve Musk",
     "tweets": 777,
     "followers": 100502,
-    "avatar": "./images/002-hacker.png"
+    "avatar": "../images/hansel.png"
   },
   {
     "id": 3,
     "user": "Elon Reeve Musk",
     "tweets": 777,
     "followers": 100503,
-    "avatar": "./images/001-avatar.png"
-  },
+    "avatar": "../images/hansel.png"
+  }
 
 ]
